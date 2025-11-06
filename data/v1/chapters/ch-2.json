@@ -1,0 +1,15 @@
+{
+  "id": "ch-2",
+  "roman": "II",
+  "number": 2,
+  "title": "Principles",
+  "articles_ids": [
+    "art-5",
+    "art-6",
+    "art-7",
+    "art-8",
+    "art-9",
+    "art-10",
+    "art-11"
+  ]
+}
