@@ -25,7 +25,7 @@ func NewChaptersController(
 }
 
 func (c *ChaptersController) RegisterTools(mcpServer *mcp.Server) {
-	mcp.AddTool(mcpServer, &mcp.Tool{Name: "GetChapterById", Description: "Get a single GDPR chapter using its ID (chap-1, chap-2, etc...)"}, c.GetChapterById)
+	mcp.AddTool(mcpServer, &mcp.Tool{Name: "GetChapterById", Description: "Get a single GDPR chapter using its ID (ch-1, ch-2, etc...)"}, c.GetChapterById)
 }
 
 type GetChapterByIdInput struct {
