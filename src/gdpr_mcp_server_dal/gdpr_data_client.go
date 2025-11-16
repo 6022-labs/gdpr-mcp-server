@@ -24,7 +24,7 @@ type GdprDataClient struct {
 
 	// articlesSet and articleParagraphsSet use the same key (article ID)
 	articlesSet          map[string]*models.Article
-	articleParagraphsSet map[string][]models.ArticleParagraph
+	articleParagraphsSet map[string][]*models.ArticleParagraph
 
 	mu sync.RWMutex
 }
@@ -36,7 +36,7 @@ func NewGdprDataClient(dataSettings *settings.DataSettings, logger *zap.Logger) 
 		recitalsSet:          make(map[string]*models.Recital),
 		chaptersSet:          make(map[string]*models.Chapter),
 		articlesSet:          make(map[string]*models.Article),
-		articleParagraphsSet: make(map[string][]models.ArticleParagraph),
+		articleParagraphsSet: make(map[string][]*models.ArticleParagraph),
 	}
 
 	if err := c.loadData(); err != nil {
@@ -182,7 +182,7 @@ func (c *GdprDataClient) loadArticleParagraphs() error {
 			if p.ArticleId == "" {
 				return fmt.Errorf("paragraph missing ArticleId (path=%s)", path)
 			}
-			c.articleParagraphsSet[p.ArticleId] = append(c.articleParagraphsSet[p.ArticleId], p)
+			c.articleParagraphsSet[p.ArticleId] = append(c.articleParagraphsSet[p.ArticleId], &p)
 		}
 	}
 
@@ -222,12 +222,12 @@ func (c *GdprDataClient) ArticlesSetSnapshot() map[string]*models.Article {
 	return out
 }
 
-func (c *GdprDataClient) ArticleParagraphsSetSnapshot() map[string][]models.ArticleParagraph {
+func (c *GdprDataClient) ArticleParagraphsSetSnapshot() map[string][]*models.ArticleParagraph {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	out := make(map[string][]models.ArticleParagraph, len(c.articleParagraphsSet))
+	out := make(map[string][]*models.ArticleParagraph, len(c.articleParagraphsSet))
 	for id, ps := range c.articleParagraphsSet {
-		cp := make([]models.ArticleParagraph, len(ps))
+		cp := make([]*models.ArticleParagraph, len(ps))
 		copy(cp, ps)
 		out[id] = cp
 	}

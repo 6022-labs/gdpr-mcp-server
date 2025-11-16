@@ -6,12 +6,20 @@ import (
 	infra_repositories "github.com/6022-labs/gdpr-mcp-server/src/gdpr_mcp_server_dal/repositories"
 	"github.com/6022-labs/gdpr-mcp-server/src/gdpr_mcp_server_dal/settings"
 	"go.uber.org/dig"
+	"go.uber.org/zap"
 )
 
 func AddGdprMcpServerDalConfiguration(container *dig.Container) {
 	// Clients
 	err := container.Provide(
-		gdpr_mcp_server_dal.NewGdprDataClient,
+		func(dataSettings *settings.DataSettings, logger *zap.Logger) *gdpr_mcp_server_dal.GdprDataClient {
+			client, err := gdpr_mcp_server_dal.NewGdprDataClient(dataSettings, logger)
+			if err != nil {
+				panic(err)
+			}
+
+			return client
+		},
 	)
 	if err != nil {
 		panic(err)
@@ -52,7 +60,7 @@ func AddGdprMcpServerDalConfiguration(container *dig.Container) {
 
 	err = container.Provide(
 		infra_repositories.NewArticleParagraphsRepository,
-		dig.As(new(repositories.ArticlesRepositoryInterface)),
+		dig.As(new(repositories.ArticleParagraphsRepositoryInterface)),
 	)
 	if err != nil {
 		panic(err)

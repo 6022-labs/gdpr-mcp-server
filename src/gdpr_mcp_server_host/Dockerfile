@@ -21,6 +21,11 @@ FROM scratch AS final
 # Import the compiled executable from the first stage.
 COPY --from=builder /app /app
 COPY --from=builder /etc/ssl/certs /etc/ssl/certs
+COPY --from=builder /usr/local/go/src/github.com/6022-labs/gdpr-mcp-server/data /data
+
+ENV DAL_ARTICLES_DATA_FILE_PATH=/data/v1/articles
+ENV DAL_CHAPTERS_DATA_FILE_PATH=/data/v1/chapters
+ENV DAL_RECITALS_DATA_FILE_PATH=/data/v1/recitals
 
 EXPOSE 8000
 
