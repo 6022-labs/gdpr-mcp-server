@@ -194,7 +194,13 @@ func (c *GdprDataClient) RecitalsSetSnapshot() map[string]*models.Recital {
 	defer c.mu.RUnlock()
 	out := make(map[string]*models.Recital, len(c.recitalsSet))
 	for id, r := range c.recitalsSet {
-		copyVal := *r
+		texts := make([]string, len(r.Texts))
+		copy(texts, r.Texts)
+		copyVal := models.Recital{
+			ID:     r.ID,
+			Number: r.Number,
+			Texts:  texts,
+		}
 		out[id] = &copyVal
 	}
 	return out
@@ -205,7 +211,15 @@ func (c *GdprDataClient) ChaptersSetSnapshot() map[string]*models.Chapter {
 	defer c.mu.RUnlock()
 	out := make(map[string]*models.Chapter, len(c.chaptersSet))
 	for id, ch := range c.chaptersSet {
-		copyVal := *ch
+		articles := make([]string, len(ch.ArticlesIds))
+		copy(articles, ch.ArticlesIds)
+		copyVal := models.Chapter{
+			ID:          ch.ID,
+			Roman:       ch.Roman,
+			Number:      ch.Number,
+			Title:       ch.Title,
+			ArticlesIds: articles,
+		}
 		out[id] = &copyVal
 	}
 	return out
@@ -217,6 +231,7 @@ func (c *GdprDataClient) ArticlesSetSnapshot() map[string]*models.Article {
 	out := make(map[string]*models.Article, len(c.articlesSet))
 	for id, a := range c.articlesSet {
 		copyVal := *a
+		// No need to deep copy as Article has no slice/map fields
 		out[id] = &copyVal
 	}
 	return out
@@ -227,8 +242,17 @@ func (c *GdprDataClient) ArticleParagraphsSetSnapshot() map[string][]*models.Art
 	defer c.mu.RUnlock()
 	out := make(map[string][]*models.ArticleParagraph, len(c.articleParagraphsSet))
 	for id, ps := range c.articleParagraphsSet {
-		cp := make([]*models.ArticleParagraph, len(ps))
-		copy(cp, ps)
+		cp := make([]*models.ArticleParagraph, 0, len(ps))
+		for _, p := range ps {
+			texts := make([]string, len(p.Texts))
+			copy(texts, p.Texts)
+			np := &models.ArticleParagraph{
+				Number:    p.Number,
+				ArticleId: p.ArticleId,
+				Texts:     texts,
+			}
+			cp = append(cp, np)
+		}
 		out[id] = cp
 	}
 	return out
