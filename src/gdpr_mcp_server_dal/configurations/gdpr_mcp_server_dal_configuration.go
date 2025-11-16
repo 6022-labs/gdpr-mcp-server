@@ -20,6 +20,7 @@ func AddGdprMcpServerDalConfiguration(container *dig.Container) {
 
 			return client
 		},
+		dig.As(new(gdpr_mcp_server_dal.GdprDataClientInterface)),
 	)
 	if err != nil {
 		panic(err)
