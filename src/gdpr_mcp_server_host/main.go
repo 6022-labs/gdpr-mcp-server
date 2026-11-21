@@ -9,7 +9,7 @@ import (
 	"github.com/6022-labs/gdpr-mcp-server/src/gdpr_mcp_server_host/settings"
 	"github.com/joho/godotenv"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
-	slogzap "github.com/samber/slog-zap"
+	slogzap "github.com/samber/slog-zap/v2"
 	"go.uber.org/zap"
 )
 
