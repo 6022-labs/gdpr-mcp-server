@@ -41,7 +41,13 @@ func TestWhenGettingArticleByID(t *testing.T) {
 
 			suite := WhenGettingArticleByIDBeforeEach(t)
 
-			expected := &models.Article{ID: "art-1", Number: 1, Roman: "1", Title: "Subject-matter and objectives", NumberOfParagraphs: 2}
+			expected := &models.Article{
+				ID:                 "art-1",
+				Number:             1,
+				Roman:              "1",
+				Title:              "Subject-matter and objectives",
+				NumberOfParagraphs: 2,
+			}
 			snapshot := map[string]*models.Article{
 				"art-1": expected,
 			}
@@ -115,7 +121,13 @@ func TestWhenGettingArticleByID(t *testing.T) {
 
 			suite := WhenGettingArticleByIDBeforeEach(t)
 			snapshot := map[string]*models.Article{
-				"art-1": {ID: "art-1", Number: 1, Roman: "1", Title: "Subject-matter and objectives", NumberOfParagraphs: 2},
+				"art-1": {
+					ID:                 "art-1",
+					Number:             1,
+					Roman:              "1",
+					Title:              "Subject-matter and objectives",
+					NumberOfParagraphs: 2,
+				},
 			}
 			suite.gdprDataClientMock.EXPECT().ArticlesSetSnapshot().Return(snapshot).Times(1)
 

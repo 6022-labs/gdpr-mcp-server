@@ -16,7 +16,9 @@ type WhenGettingArticleParagraphByArticleIdAndIndexTestingSuite struct {
 	gdprDataClientMock *gdpr_mcp_server_dal_mocks.MockGdprDataClientInterface
 }
 
-func WhenGettingArticleParagraphByArticleIdAndIndexBeforeEach(t *testing.T) *WhenGettingArticleParagraphByArticleIdAndIndexTestingSuite {
+func WhenGettingArticleParagraphByArticleIdAndIndexBeforeEach(
+	t *testing.T,
+) *WhenGettingArticleParagraphByArticleIdAndIndexTestingSuite {
 	mockController := gomock.NewController(t)
 
 	gdprDataClientMock := gdpr_mcp_server_dal_mocks.NewMockGdprDataClientInterface(mockController)
@@ -99,7 +101,10 @@ func TestWhenGettingArticleParagraphByArticleIdAndIndex(t *testing.T) {
 			t.Parallel()
 
 			suite := WhenGettingArticleParagraphByArticleIdAndIndexBeforeEach(t)
-			suite.gdprDataClientMock.EXPECT().ArticleParagraphsSetSnapshot().Return(map[string][]*models.ArticleParagraph{}).Times(1)
+			suite.gdprDataClientMock.EXPECT().
+				ArticleParagraphsSetSnapshot().
+				Return(map[string][]*models.ArticleParagraph{}).
+				Times(1)
 
 			actual, err := suite.sut.GetByArticleIdAndIndex("art-1", 0)
 

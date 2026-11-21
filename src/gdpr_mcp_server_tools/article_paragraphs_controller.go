@@ -25,7 +25,14 @@ func NewArticleParagraphsController(
 }
 
 func (c *ArticleParagraphsController) RegisterTools(mcpServer *mcp.Server) {
-	mcp.AddTool(mcpServer, &mcp.Tool{Name: "GetArticleParagraphsByArticleId", Description: "Get a paragraph for a given article ID (art-1, art-2, ...) and index"}, c.GetArticleParagraphsByArticleId)
+	mcp.AddTool(
+		mcpServer,
+		&mcp.Tool{
+			Name:        "GetArticleParagraphsByArticleId",
+			Description: "Get a paragraph for a given article ID (art-1, art-2, ...) and index",
+		},
+		c.GetArticleParagraphsByArticleId,
+	)
 }
 
 type GetArticleParagraphsByArticleIdInput struct {
@@ -33,7 +40,11 @@ type GetArticleParagraphsByArticleIdInput struct {
 	Index     uint   `json:"index"`
 }
 
-func (c *ArticleParagraphsController) GetArticleParagraphsByArticleId(ctx context.Context, req *mcp.CallToolRequest, input GetArticleParagraphsByArticleIdInput) (
+func (c *ArticleParagraphsController) GetArticleParagraphsByArticleId(
+	ctx context.Context,
+	req *mcp.CallToolRequest,
+	input GetArticleParagraphsByArticleIdInput,
+) (
 	*mcp.CallToolResult,
 	*models.ArticleParagraph,
 	error,

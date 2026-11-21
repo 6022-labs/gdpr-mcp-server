@@ -1,6 +1,9 @@
 # GDPR MCP Server
 
-[![Unit Tests](https://github.com/6022-labs/gdpr-mcp-server/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/6022-labs/gdpr-mcp-server/actions/workflows/tests.yml)
+[![Go Build](https://github.com/6022-labs/gdpr-mcp-server/actions/workflows/go-build.yml/badge.svg)](https://github.com/6022-labs/gdpr-mcp-server/actions/workflows/go-build.yml)
+[![Go Unit Tests](https://github.com/6022-labs/gdpr-mcp-server/actions/workflows/go-unit-tests.yml/badge.svg)](https://github.com/6022-labs/gdpr-mcp-server/actions/workflows/go-unit-tests.yml)
+[![Go Lint](https://github.com/6022-labs/gdpr-mcp-server/actions/workflows/go-lint.yml/badge.svg)](https://github.com/6022-labs/gdpr-mcp-server/actions/workflows/go-lint.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 GDPR Model Context Protocol (MCP) server exposing structured GDPR content (recitals, chapters, articles, and article paragraphs) to MCP-aware clients over HTTP.
 
@@ -103,4 +106,4 @@ gofmt -s -w . && go vet ./... && go test ./...
 
 ## License
 
-MIT - See [LICENSE](LICENSE) for details.
+MIT — see [LICENSE](LICENSE).

@@ -26,7 +26,11 @@ func NewArticlesController(
 }
 
 func (c *ArticlesController) RegisterTools(mcpServer *mcp.Server) {
-	mcp.AddTool(mcpServer, &mcp.Tool{Name: "GetArticleById", Description: "Get a single GDPR article using its ID (art-1, art-2, etc...)"}, c.GetArticleById)
+	mcp.AddTool(
+		mcpServer,
+		&mcp.Tool{Name: "GetArticleById", Description: "Get a single GDPR article using its ID (art-1, art-2, etc...)"},
+		c.GetArticleById,
+	)
 }
 
 type GetArticleByIdInput struct {
