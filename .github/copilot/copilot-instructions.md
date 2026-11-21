@@ -14,7 +14,7 @@ When generating code for this repository:
 
 From the codebase (do not assume beyond these):
 
-- Language: Go 1.24.3 (from `go.mod` and Dockerfile base)
+- Language: Go 1.27.4 (from `go.mod` and Dockerfile base)
 - Dependencies (from `go.mod`):
   - `go.uber.org/dig`
   - `go.uber.org/zap`
@@ -22,7 +22,7 @@ From the codebase (do not assume beyond these):
 
 Rules:
 
-- Use only Go features compatible with `go 1.24.3`.
+- Use only Go features compatible with `go 1.27.4`.
 - Use only APIs available in the listed dependency versions.
 - Do not reference unlisted libraries (e.g., Fiber) unless they are first added to `go.mod`.
 
@@ -170,7 +170,7 @@ container.Provide(func() *zap.Logger { return logger })
 ## Go-Specific Guidelines
 
 - Modules and versions:
-  - Respect `module github.com/6022-labs/gdpr-mcp-server` and `go 1.24.3`.
+  - Respect `module github.com/6022-labs/gdpr-mcp-server` and `go 1.27.4`.
   - Keep imports internal to this module unless explicitly required.
 - Error handling:
   - Follow observed patterns: `panic` for irrecoverable configuration build errors; `logger.Fatal` for critical DI issues; warnings for recoverable env issues.
