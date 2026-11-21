@@ -51,4 +51,10 @@ jobs:
             ${{ runner.os }}-go-${{ steps.setup-go.outputs.go-version }}-
 
       - name: Run tests
-        run: go test $(go list ./tests/... | grep '_unit_tests')
+        run: |
+          packages=$(go list ./tests/... | grep '_unit_tests' || true)
+          if [ -z "$packages" ]; then
+            echo "No unit test packages."
+            exit 0
+          fi
+          go test $packages
