@@ -6,7 +6,8 @@ build:
 
 # test runs the unit-test packages; the $(...) form propagates a failing exit code.
 test:
-	go test $$(go list ./tests/... | grep '_unit_tests')
+	@packages=$$(go list ./tests/... | grep '_unit_tests'); \
+	if [ -z "$$packages" ]; then echo "No unit test packages."; else go test $$packages; fi
 
 # integration-test runs the integration packages; they read the GDPR JSON under data/, no Docker needed.
 integration-test:
