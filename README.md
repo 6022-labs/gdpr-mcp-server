@@ -16,7 +16,7 @@ GDPR Model Context Protocol (MCP) server exposing structured GDPR content (recit
 
 ## Technology Stack
 
-- Go 1.24.3
+- Go 1.27.4
 - Dependency Injection: `go.uber.org/dig`
 - Logging: `go.uber.org/zap` (with optional `slog-zap` bridge)
 - MCP SDK: `github.com/modelcontextprotocol/go-sdk`

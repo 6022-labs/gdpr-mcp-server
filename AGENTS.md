@@ -8,13 +8,13 @@
   - `src/gdpr_mcp_server`: Go library with core models for GDPR artifacts.
   - `src/gdpr_mcp_server_host`: Intended host binary for MCP server (entrypoint). Currently scaffolding; `main.go` is empty.
   - `src/gdpr_mcp_server_tools`: Reserved for internal tools (e.g., generators). Currently empty.
-- Technologies: Go 1.24+, Uber Dig (DI), Uber Zap (logging).
+- Technologies: Go 1.27+, Uber Dig (DI), Uber Zap (logging).
 - Intended runtime: An MCP server executable speaking stdio to MCP clients.
 
 ## Setup Commands
 
 - Prerequisites:
-  - Go 1.24+ installed and on PATH
+  - Go 1.27+ installed and on PATH
   - macOS zsh shell (repo author’s default)
 - Clone and prepare modules:
 
@@ -145,7 +145,7 @@ go build -o bin/gdpr-mcp ./src/gdpr_mcp_server_host
 
 ```dockerfile
 # file: src/gdpr_mcp_server_host/Dockerfile
-FROM golang:1.24-alpine AS builder
+FROM golang:1.27-alpine AS builder
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
