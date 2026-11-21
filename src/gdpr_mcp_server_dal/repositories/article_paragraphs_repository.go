@@ -19,7 +19,10 @@ func NewArticleParagraphsRepository(
 	}
 }
 
-func (r *ArticleParagraphsRepository) GetByArticleIdAndIndex(articleId string, index uint) (*models.ArticleParagraph, error) {
+func (r *ArticleParagraphsRepository) GetByArticleIdAndIndex(
+	articleId string,
+	index uint,
+) (*models.ArticleParagraph, error) {
 	articleParagraphSet := r.gdprDataClient.ArticleParagraphsSetSnapshot()
 	if articleParagraphs, exists := articleParagraphSet[articleId]; exists {
 		if int(index) < len(articleParagraphs) {

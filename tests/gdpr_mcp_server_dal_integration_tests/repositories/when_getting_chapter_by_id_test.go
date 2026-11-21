@@ -41,7 +41,13 @@ func TestWhenGettingChapterByID(t *testing.T) {
 
 			suite := WhenGettingChapterByIDBeforeEach(t)
 
-			expected := &models.Chapter{ID: "ch-1", Roman: "I", Number: 1, Title: "General provisions", ArticlesIds: []string{"art-1", "art-2"}}
+			expected := &models.Chapter{
+				ID:          "ch-1",
+				Roman:       "I",
+				Number:      1,
+				Title:       "General provisions",
+				ArticlesIds: []string{"art-1", "art-2"},
+			}
 			snapshot := map[string]*models.Chapter{
 				"ch-1": expected,
 			}

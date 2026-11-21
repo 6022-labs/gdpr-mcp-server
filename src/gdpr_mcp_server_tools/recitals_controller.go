@@ -25,7 +25,11 @@ func NewRecitalsController(
 }
 
 func (c *RecitalsController) RegisterTools(mcpServer *mcp.Server) {
-	mcp.AddTool(mcpServer, &mcp.Tool{Name: "GetRecitalById", Description: "Get a single GDPR recital using its ID (rec-1, rec-2, etc...)"}, c.GetRecitalById)
+	mcp.AddTool(
+		mcpServer,
+		&mcp.Tool{Name: "GetRecitalById", Description: "Get a single GDPR recital using its ID (rec-1, rec-2, etc...)"},
+		c.GetRecitalById,
+	)
 }
 
 type GetRecitalByIdInput struct {
